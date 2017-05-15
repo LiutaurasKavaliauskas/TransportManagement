@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +20,23 @@ class Vehicles extends Model
      */
     protected $fillable = [
         'title',
-        'tm_fuel_rates_id',
     ];
+
+    public function fuelRates()
+    {
+        return $this->belongsTo('App\Models\Fuelrates',  'id', 'tm_vehicles_id');
+    }
+//
+//    public function filterVehicles()
+//    {
+//        $vehicles = [];
+//        foreach (Vehicles::all() as $vehicle)
+//            foreach (FuelRates::all() as $rate)
+//                if($vehicle['id'] != $rate->vehicle['id'])
+//                    $vehicles = $vehicle;
+//
+//        dd($vehicles);
+//        return $vehicles;
+//
+//    }
 }

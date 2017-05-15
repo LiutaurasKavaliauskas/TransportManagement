@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,5 +22,11 @@ class FuelRates extends Model
         'idle_rate',
         'going_rate',
         'unloading_rate',
+        'tm_vehicles_id',
     ];
+
+    public function vehicle()
+    {
+        return $this->hasOne('App\Models\Vehicles', 'id', 'tm_vehicles_id');
+    }
 }
