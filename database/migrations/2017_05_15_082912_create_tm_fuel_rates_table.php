@@ -16,7 +16,7 @@ class CreateTmFuelRatesTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->float('idle_rate', 10, 0);
-			$table->float('goind_rate', 10, 0);
+			$table->float('going_rate', 10, 0);
 			$table->float('unloading_rate', 10, 0);
 		});
 	}
