@@ -16,6 +16,7 @@ class CreateTmVehiclesReportsConnectionsTable extends Migration {
 		{
 			$table->integer('tm_vehicles_id')->index('fk_tm_vehicles_reports_connections_tm_vehicles1_idx');
 			$table->integer('tm_travel_reports_id')->index('fk_tm_vehicles_reports_connections_tm_travel_reports1_idx');
+            $table->timestamps();
 		});
 	}
 

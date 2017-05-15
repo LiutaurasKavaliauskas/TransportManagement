@@ -18,6 +18,7 @@ class CreateTmFuelRatesTable extends Migration {
 			$table->float('idle_rate', 10, 0);
 			$table->float('going_rate', 10, 0);
 			$table->float('unloading_rate', 10, 0);
+            $table->timestamps();
 		});
 	}
 

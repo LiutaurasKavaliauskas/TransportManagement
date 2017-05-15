@@ -26,6 +26,7 @@ class CreateTmTravelReportsTable extends Migration {
 			$table->float('time_unloading', 10, 0);
 			$table->float('distance', 10, 0);
 			$table->float('fuel', 10, 0);
+            $table->timestamps();
 		});
 	}
 

@@ -16,8 +16,8 @@ class CreateTmVehiclesTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('title', 45);
-			$table->integer('tm_fuel_rates_id')->index('fk_tm_vehicles_tm_fuel_rates_idx');
-			$table->primary(['id','tm_fuel_rates_id']);
+			$table->integer('tm_fuel_rates_id')->index('fk_tm_vehicles_tm_fuel_rates_idx')->nullable();
+            $table->timestamps();
 		});
 	}
 
