@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'vehicles', 'middleware' => 'auth'], function (){
+    Route::get('/', ['as' => 'vehicles', 'uses' => 'VehiclesController@index']);
+    Route::post('create', ['as' => 'vehicles.create', 'uses' => 'VehiclesController@create']);
+    Route::post('edit/{id}', ['as' => 'vehicles.edit', 'uses' => 'VehiclesController@edit']);
+    Route::post('delete/{id}', ['as' => 'vehicles.delete', 'uses' => 'VehiclesController@delete']);
+});
+
