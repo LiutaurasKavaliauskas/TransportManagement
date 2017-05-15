@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VehiclesRequest;
-use App\Vehicles;
-use Illuminate\Http\Request;
+use App\Models\Vehicles;
 
 class VehiclesController extends Controller
 {
@@ -15,7 +14,7 @@ class VehiclesController extends Controller
      */
     public function index()
     {
-        return view('transport.vehicles', ['vehicles' => Vehicles::all()->toArray()]);
+        return view('transport.vehicles', ['vehicles' => Vehicles::all()]);
     }
 
     /**
@@ -25,7 +24,7 @@ class VehiclesController extends Controller
      */
     public function create(VehiclesRequest $request)
     {
-        Vehicles::create([
+        Vehicles::firstOrCreate([
             'title' => $request->title
         ]);
 
