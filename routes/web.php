@@ -19,10 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Resource routes could be used instead
+
 Route::group(['prefix' => 'vehicles', 'middleware' => 'auth'], function (){
     Route::get('/', ['as' => 'vehicles', 'uses' => 'VehiclesController@index']);
     Route::post('create', ['as' => 'vehicles.create', 'uses' => 'VehiclesController@create']);
     Route::post('edit/{id}', ['as' => 'vehicles.edit', 'uses' => 'VehiclesController@edit']);
     Route::post('delete/{id}', ['as' => 'vehicles.delete', 'uses' => 'VehiclesController@delete']);
+});
+
+Route::group(['prefix' => 'rates', 'middleware' => 'auth'], function (){
+   Route::get('/', ['as' => 'fuel.rates', 'uses' => 'FuelRatesController@index']);
+   Route::post('/create', ['as' => 'fuel.rates.create', 'uses' => 'FuelRatesController@create']);
+    Route::post('edit/{id}', ['as' => 'fuel.rates.edit', 'uses' => 'FuelRatesController@edit']);
+    Route::post('delete/{id}', ['as' => 'fuel.rates.delete', 'uses' => 'FuelRatesController@delete']);
 });
 
