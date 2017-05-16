@@ -16,7 +16,7 @@ class User
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->isUser())
+        if (Auth::check() && (Auth::user()->isUser() || Auth::user()->isAdmin()))
             return $next($request);
 
         return redirect('home');
