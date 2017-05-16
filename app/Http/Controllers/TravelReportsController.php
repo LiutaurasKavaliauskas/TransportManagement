@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TravelReportsRequest;
 use App\Models\TravelReports;
+use App\Models\UsersTravelReportsConnections;
 use App\Models\Vehicles;
 use App\Models\VehiclesReportsConnections;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class TravelReportsController extends Controller
@@ -61,6 +63,11 @@ class TravelReportsController extends Controller
 
         VehiclesReportsConnections::create([
             'tm_vehicles_id'       => $vehicle->id,
+            'tm_travel_reports_id' => $report->id,
+        ]);
+
+        UsersTravelReportsConnections::create([
+            'user_id' => Auth::user()->id,
             'tm_travel_reports_id' => $report->id,
         ]);
 
