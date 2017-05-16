@@ -28,7 +28,7 @@ class CreateTmVehiclesReportsConnectionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tm_vehicles_reports_connections');
+		Schema::dropIfExists('tm_vehicles_reports_connections');
 	}
 
 }

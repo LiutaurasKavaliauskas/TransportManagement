@@ -38,7 +38,7 @@ class CreateTmTravelReportsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tm_travel_reports');
+		Schema::dropIfExists('tm_travel_reports');
 	}
 
 }

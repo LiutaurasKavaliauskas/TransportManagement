@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTmVehiclesTable extends Migration {
+class CreateRolesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class CreateTmVehiclesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tm_vehicles', function(Blueprint $table)
+		Schema::create('roles', function(Blueprint $table)
 		{
-			$table->integer('id', true);
-			$table->string('title', 45);
-            $table->timestamps();
+			$table->increments('id');
+			$table->string('name');
+			$table->timestamps();
 		});
 	}
 
@@ -28,7 +28,7 @@ class CreateTmVehiclesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('tm_vehicles');
+		Schema::drop('roles');
 	}
 
 }
