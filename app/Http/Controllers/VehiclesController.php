@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VehiclesRequest;
 use App\Models\Vehicles;
+use App\Models\VehiclesReportsConnections;
 
 class VehiclesController extends Controller
 {
@@ -54,7 +55,10 @@ class VehiclesController extends Controller
     public function delete($id)
     {
         if(Vehicles::find($id))
+        {
+            VehiclesReportsConnections::where('tm_vehicles_id', $id)->delete();
             Vehicles::where('id', $id)->delete();
+        }
 
         return redirect()->back();
     }
