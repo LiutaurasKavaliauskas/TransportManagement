@@ -31,4 +31,9 @@ class TravelReports extends Model
         'distance',
         'fuel',
     ];
+
+    public function getVehicle()
+    {
+        return $this->belongsToMany(Vehicles::class, (new VehiclesReportsConnections())->getTable(), 'tm_travel_reports_id', 'tm_vehicles_id')->select('title');
+    }
 }
