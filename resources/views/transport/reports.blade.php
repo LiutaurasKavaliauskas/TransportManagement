@@ -5,7 +5,7 @@
     <style>
         table, tr, td {
             border: double;
-            font-size: 20px;
+            font-size: 16px;
         }
     </style>
 
@@ -20,9 +20,9 @@
     @endif
 
     <div>
-        @if(!$vehicles)
+        @if(!$reports->toArray())
             <div>
-                No vehicles!
+                <h1 style="color: red">No reports created yet!</h1>
             </div>
         @else
             <table>
@@ -57,12 +57,6 @@
                     </td>
                     <td>
                         Speedometer readings
-                    </td>
-                    <td>
-                        Time spent going
-                    </td>
-                    <td>
-                        Time spent standing
                     </td>
                     <td>
                         Distance
@@ -105,99 +99,110 @@
                             {{ $report->speedometer_readings_2 }}
                         </td>
                         <td>
-                            {{ $report->time_spent_going }}
-                        </td>
-                        <td>
-                            {{ $report->time_spent_standing }}
-                        </td>
-                        <td>
                             {{ $report->distance }}
                         </td>
                         <td>
                             {{ $report->fuel }}
                         </td>
                         <td>
-                            {{--<button type="button" class="btn-success" data-toggle="modal"--}}
-                                    {{--data-target="#vehiclesEditModal{{$vehicle['id']}}">--}}
-                                {{--Edit Vehicle--}}
-                            {{--</button>--}}
-                            {{--<button type="button" class="btn-danger" data-toggle="modal"--}}
-                                    {{--data-target="#vehiclesDeleteModal{{$vehicle['id']}}">--}}
-                                {{--Delete Vehicle--}}
-                            {{--</button>--}}
+                            <button type="button" class="btn-success" data-toggle="modal"
+                                    data-target="#reportsEditModal{{ $report->id }}">
+                                Edit Report
+                            </button>
+                            <button type="button" class="btn-danger" data-toggle="modal"
+                                    data-target="#reportsDeleteModal{{ $report->id }}">
+                                Delete Report
+                            </button>
 
-                            {{--{!! Form::open(['url' => route('vehicles.edit', ['id' => $vehicle['id']])]) !!}--}}
-                            {{--<div class="modal fade" id="vehiclesEditModal{{$vehicle['id']}}"--}}
-                                 {{--tabindex="-1" role="dialog"--}}
-                                 {{--aria-labelledby="vehiclesEditModalLabel">--}}
-                                {{--<div class="modal-dialog" role="document">--}}
-                                    {{--<div class="modal-content">--}}
-                                        {{--<div class="modal-header">--}}
-                                            {{--<button type="button" class="close"--}}
-                                                    {{--data-dismiss="modal"--}}
-                                                    {{--aria-label="Close">--}}
-                                                {{--<span aria-hidden="true">&times;</span></button>--}}
-                                            {{--<h4 class="modal-title"--}}
-                                                {{--id="vehiclesModalLabel">Vehicles edit form</h4>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="modal-body">--}}
-                                            {{--<label>Vehicle title</label>--}}
-                                            {{--<input name="title" type="text" class="form-control" value="{{$vehicle['title']}}">--}}
-                                        {{--</div>--}}
-                                        {{--<div class="modal-footer">--}}
-                                            {{--<button type="button"--}}
-                                                    {{--class="btn btn-default"--}}
-                                                    {{--data-dismiss="modal">--}}
-                                                {{--Close--}}
-                                            {{--</button>--}}
-                                            {{--<span class="pull-right">--}}
-                                        {{--<button type="submit" class="btn btn-primary">--}}
-                                            {{--Save--}}
-                                        {{--</button>--}}
-                                    {{--</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--{!! Form::close() !!}--}}
+                            {!! Form::open(['url' => route('reports.edit', ['id' => $report->id])]) !!}
+                            <div class="modal fade" id="reportsEditModal{{ $report->id }}"
+                                 tabindex="-1" role="dialog"
+                                 aria-labelledby="reportsEditModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title"
+                                                id="vehiclesModalLabel">Reports edit form</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="font-size: 18px">
+                                                {!! Form::select('vehicle', $vehicles, $report->getVehicle->first()['title']) !!}
+                                            </div>
+                                            <label>Date</label>
+                                            <input name="date" type="date" class="form-control" value="{{ $report->date }}">
+                                            <label>Route</label>
+                                            <input name="route" type="text" class="form-control" value="{{ $report->route }}">
+                                            <label>Left terminal at</label>
+                                            <input name="left_terminal_at" class="form-control time" type="text" value="{{  $report->terminal_left }}"/>
+                                            <label>Speedometer readings</label>
+                                            <input name="speedometer_readings_1" type="number" min="0" class="form-control" value="{{ $report->speedometer_readings_1 }}">
+                                            <label>Arrived to client at</label>
+                                            <input name="arrived_to_client_at" class="form-control time" type="text" value="{{ $report->client_arrived }}"/>
+                                            <label>Unloading time</label>
+                                            <input name="unloading_time" type="number" min="0" class="form-control" value="{{ $report->time_unloading }}">
+                                            <label>Left client at</label>
+                                            <input name="left_client_at" class="form-control time" type="text" value="{{ $report->client_left }}"/>
+                                            <label>Arrived to terminal at</label>
+                                            <input name="arrived_to_terminal_at" class="form-control time" type="text" value="{{ $report->terminal_arrived }}"/>
+                                            <label>Speedometer readings</label>
+                                            <input name="speedometer_readings_2" type="number" min="0" class="form-control" value="{{ $report->speedometer_readings_2 }}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"
+                                                    class="btn btn-default"
+                                                    data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <span class="pull-right">
+                                        <button type="submit" class="btn btn-primary">
+                                            Save
+                                        </button>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
 
-                            {{--{!! Form::open(['url' => route('vehicles.delete', ['id' => $vehicle['id']])]) !!}--}}
-                            {{--<div class="modal fade" id="vehiclesDeleteModal{{$vehicle['id']}}"--}}
-                                 {{--tabindex="-1" role="dialog"--}}
-                                 {{--aria-labelledby="vehiclesDeleteModalLabel">--}}
-                                {{--<div class="modal-dialog" role="document">--}}
-                                    {{--<div class="modal-content">--}}
-                                        {{--<div class="modal-header">--}}
-                                            {{--<button type="button" class="close"--}}
-                                                    {{--data-dismiss="modal"--}}
-                                                    {{--aria-label="Close">--}}
-                                                {{--<span aria-hidden="true">&times;</span></button>--}}
-                                            {{--<h4 class="modal-title"--}}
-                                                {{--id="vehiclesModalLabel">Vehicles delete form</h4>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="modal-body">--}}
-                                            {{--<label>Vehicle title</label>--}}
-                                            {{--<input name="title" type="text" class="form-control" value="{{$vehicle['title']}}">--}}
-                                        {{--</div>--}}
-                                        {{--<div>--}}
-                                            {{--Are you sure you want to delete this vehicle?--}}
-                                        {{--</div>--}}
-                                        {{--<div class="modal-footer">--}}
-                                            {{--<button type="button"--}}
-                                                    {{--class="btn btn-default"--}}
-                                                    {{--data-dismiss="modal">--}}
-                                                {{--No--}}
-                                            {{--</button>--}}
-                                            {{--<span class="pull-right">--}}
-                                        {{--<button type="submit" class="btn btn-primary">--}}
-                                            {{--Yes--}}
-                                        {{--</button>--}}
-                                    {{--</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--{!! Form::close() !!}--}}
+                            {!! Form::open(['url' => route('reports.delete', ['id' => $report->id])]) !!}
+                            <div class="modal fade" id="reportsDeleteModal{{ $report->id }}"
+                                 tabindex="-1" role="dialog"
+                                 aria-labelledby="reportsDeleteModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title"
+                                                id="vehiclesModalLabel">Reports delete form</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        </div>
+                                        <div>
+                                            Are you sure you want to delete this report?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"
+                                                    class="btn btn-default"
+                                                    data-dismiss="modal">
+                                                No
+                                            </button>
+                                            <span class="pull-right">
+                                        <button type="submit" class="btn btn-primary">
+                                            Yes
+                                        </button>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
 
                         </td>
                     </tr>
@@ -229,7 +234,9 @@
                         id="vehiclesModalLabel">Reports add form</h4>
                 </div>
                 <div class="modal-body">
-                    {!! Form::select('vehicle', $vehicles, null, ['placeholder' => 'Select a vehicle']) !!}
+                    <div style="font-size: 18px">
+                        {!! Form::select('vehicle', $vehicles, null, ['placeholder' => 'Select a vehicle']) !!}
+                    </div>
                     <label>Date</label>
                     <input name="date" type="date" class="form-control">
                     <label>Route</label>
