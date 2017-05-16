@@ -19,10 +19,10 @@ class CreateTmTravelReportsTable extends Migration {
 			$table->text('route', 65535);
 			$table->time('terminal_left');
 			$table->time('terminal_arrived');
-			$table->integer('speedometer_readings_1');
+			$table->string('speedometer_readings_1');
 			$table->time('client_arrived');
 			$table->time('client_left');
-			$table->integer('speedometer_readings_2');
+			$table->string('speedometer_readings_2');
 			$table->float('time_unloading', 10, 0);
 			$table->float('distance', 10, 0);
 			$table->float('fuel', 10, 0);
