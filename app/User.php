@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Roles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -17,6 +18,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'roles_id',
         'password',
     ];
 
@@ -29,4 +31,22 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Checks if user has admin role
+     */
+    public function isAdmin()
+    {
+        if(Roles::where('id', $this->roles_id)->first()->name == 'Admin')
+            return;
+    }
+
+    /**
+     * Checks if users has user role
+     */
+    public function isUser()
+    {
+        if(Roles::where('id', $this->roles_id)->first()->name == 'User')
+            return;
+    }
 }

@@ -31,7 +31,7 @@ class CreateTmFuelRatesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tm_fuel_rates');
+		Schema::dropIfExists('tm_fuel_rates');
 	}
 
 }
