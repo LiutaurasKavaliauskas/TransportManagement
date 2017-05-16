@@ -22,7 +22,7 @@
     <div>
         @if(!$vehicles)
             <div>
-                No vehicles!
+                <h1 style="color: red;">No vehicles!</h1>
             </div>
         @else
             <table>

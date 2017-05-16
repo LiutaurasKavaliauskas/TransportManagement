@@ -21,7 +21,7 @@
     <div>
         @if(!$rates->toArray())
             <div>
-                No fuel rates!
+                <h1 style="color: red">No fuel rates!</h1>
             </div>
         @else
             <table>
@@ -77,15 +77,16 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="ratesModalLabel">Rates Edit Form</h4>
+                                                id="vehiclesModalLabel">Vehicles edit form</h4>
                                         </div>
                                         <div class="modal-body">
+                                            <input name="vehicle" type="hidden" value="{{$rate->vehicle['id']}}">
                                             <label>Idle rate</label>
-                                            <input name="idle_rate" type="number" min="0" class="form-control">
+                                            <input name="idle_rate" type="number" min="0" class="form-control" value="{{  $rate['idle_rate'] }}">
                                             <label>Going rate</label>
-                                            <input name="going_rate" type="number" min="0" class="form-control">
+                                            <input name="going_rate" type="number" min="0" class="form-control" value="{{ $rate['going_rate'] }}">
                                             <label>Unloading rate</label>
-                                            <input name="unloading_rate" type="number" min="0" class="form-control">
+                                            <input name="unloading_rate" type="number" min="0" class="form-control" value="{{ $rate['unloading_rate'] }}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
@@ -183,13 +184,15 @@
                         id="vehiclesModalLabel">Fuel Rates Add Form</h4>
                 </div>
                 <div class="modal-body">
+                    <div style="font-size: 18px">
+                        {!! Form::select('vehicle', $vehicles, null, ['placeholder' => 'Select a vehicle']) !!}
+                    </div>
                     <label>Idle rate</label>
                     <input name="idle_rate" type="number" min="0" class="form-control">
                     <label>Going rate</label>
                     <input name="going_rate" type="number" min="0" class="form-control">
                     <label>Unloading rate</label>
                     <input name="unloading_rate" type="number" min="0" class="form-control">
-                    {!! Form::select('vehicle', $vehicles, null, ['placeholder' => 'Select a vehicle']) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button"
