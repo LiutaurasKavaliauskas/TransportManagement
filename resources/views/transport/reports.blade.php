@@ -59,6 +59,12 @@
                         Speedometer readings
                     </td>
                     <td>
+                        Time spent going
+                    </td>
+                    <td>
+                        Time spent standing
+                    </td>
+                    <td>
                         Distance
                     </td>
                     <td>
@@ -66,10 +72,49 @@
                     </td>
                 </tr>
 
-                @foreach($vehicles as $vehicle)
+                @foreach($reports as $report)
                     <tr>
                         <td>
-                            {{ $vehicle }}
+                            {{ $report->getVehicle->first()['title'] }}
+                        </td>
+                        <td>
+                            {{ $report->date }}
+                        </td>
+                        <td>
+                            {{ $report->route }}
+                        </td>
+                        <td>
+                            {{  $report->terminal_left }}
+                        </td>
+                        <td>
+                            {{ $report->speedometer_readings_1 }}
+                        </td>
+                        <td>
+                            {{ $report->client_arrived }}
+                        </td>
+                        <td>
+                            {{ $report->time_unloading }}
+                        </td>
+                        <td>
+                            {{ $report->client_left }}
+                        </td>
+                        <td>
+                            {{ $report->terminal_arrived }}
+                        </td>
+                        <td>
+                            {{ $report->speedometer_readings_2 }}
+                        </td>
+                        <td>
+                            {{ $report->time_spent_going }}
+                        </td>
+                        <td>
+                            {{ $report->time_spent_standing }}
+                        </td>
+                        <td>
+                            {{ $report->distance }}
+                        </td>
+                        <td>
+                            {{ $report->fuel }}
                         </td>
                         <td>
                             {{--<button type="button" class="btn-success" data-toggle="modal"--}}
