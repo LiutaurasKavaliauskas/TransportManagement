@@ -35,6 +35,11 @@ Route::group(['prefix' => 'rates', 'middleware' => 'admin'], function (){
     Route::post('delete/{id}', ['as' => 'fuel.rates.delete', 'uses' => 'FuelRatesController@delete']);
 });
 
+Route::group(['prefix' => 'users', 'middleware' => 'admin'], function() {
+    Route::get('/', ['as' => 'users', 'uses' => 'AdminController@index']);
+    Route::post('{id}', ['as' => 'users.show', 'uses' => 'AdminController@showReports']);
+});
+
 Route::group(['prefix' => 'reports', 'middleware' => 'user'], function (){
     Route::get('/', ['as' => 'reports', 'uses' => 'TravelReportsController@index']);
     Route::post('/create', ['as' => 'reports.create', 'uses' => 'TravelReportsController@create']);
