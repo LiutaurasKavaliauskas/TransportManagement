@@ -14,7 +14,7 @@ class VehiclesController extends Controller
      */
     public function index()
     {
-        return view('transport.vehicles', ['vehicles' => Vehicles::all()]);
+        return view('transport.vehicles', ['vehicles' => Vehicles::all()->toArray()]);
     }
 
     /**
