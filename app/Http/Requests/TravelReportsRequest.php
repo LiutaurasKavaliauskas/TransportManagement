@@ -23,8 +23,9 @@ class TravelReportsRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'date'                   => 'required',
+            'date'                   => 'required|date',
             'route'                  => 'required',
             'left_terminal_at'       => 'required',
             'arrived_to_terminal_at' => 'required',
