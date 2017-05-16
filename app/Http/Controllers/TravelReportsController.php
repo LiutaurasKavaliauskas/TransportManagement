@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TravelReportsRequest;
 use App\Models\TravelReports;
 use App\Models\Vehicles;
+use App\Models\VehiclesReportsConnections;
 use Illuminate\Http\Request;
 
 class TravelReportsController extends Controller
@@ -16,7 +17,7 @@ class TravelReportsController extends Controller
      */
     public function index()
     {
-        return view('transport.reports', ['vehicles' => Vehicles::pluck('title', 'id')->toArray()]);
+        return view('transport.reports', ['reports' => TravelReports::all(), 'vehicles' => Vehicles::pluck('title', 'id')->toArray()]);
     }
 
     /**
@@ -26,11 +27,14 @@ class TravelReportsController extends Controller
      */
     public function create(TravelReportsRequest $request)
     {
-//        Vehicles::where('id', $request->vehicle)->first()->fuelRates
-        //gmdate("H:i:s", ($request->unloading_time * 60)
-        $timeGoing = $request->arrived_to_client_at - $request->left_terminal_at;
-        $timeStanding = (strtotime($request->left_client_at) - strtotime($request->arrived_to_client_at))/60 - (int)$request->unloading_time;
-        TravelReports::firstOrCreate([
+        $vehicle = Vehicles::where('id', $request->vehicle)->first();
+
+        $timeGoing = ((strtotime($request->arrived_to_client_at) - strtotime($request->left_terminal_at)) +
+                (strtotime($request->arrived_to_terminal_at) - strtotime($request->left_client_at))) / 3600;
+
+        $timeStanding = ((strtotime($request->left_client_at) - strtotime($request->arrived_to_client_at)) / 60 - (int)$request->unloading_time) / 60;
+
+        $report = TravelReports::firstOrCreate([
             'date'                   => $request->date,
             'route'                  => $request->route,
             'terminal_left'          => $request->left_terminal_at,
@@ -40,8 +44,13 @@ class TravelReportsController extends Controller
             'client_left'            => $request->left_client_at,
             'speedometer_readings_2' => $request->speedometer_readings_2,
             'time_unloading'         => $request->unloading_time,
-            'distance' => $request->speedometer_readings_2 - $request->speedometer_readings_1,
-            'fuel' => 1,
+            'distance'               => $request->speedometer_readings_2 - $request->speedometer_readings_1,
+            'fuel'                   => $vehicle->fuelRates->idle_rate * $timeStanding + $vehicle->fuelRates->going_rate * $timeGoing + $vehicle->fuelRates->unloading_time * $request->unloading_time,
+        ]);
+
+        VehiclesReportsConnections::create([
+            'tm_vehicles_id'       => $vehicle->id,
+            'tm_travel_reports_id' => $report->id,
         ]);
 
         return redirect()->back();
