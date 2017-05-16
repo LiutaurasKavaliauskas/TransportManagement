@@ -102,6 +102,8 @@
                 <ul class="nav navbar-nav">
                    <li><a href="{{route('vehicles')}}">Vehicles</a></li> &nbsp;
                    <li><a href="{{route('fuel.rates')}}">FuelRates</a></li>
+                   <li><a href="{{route('reports')}}">Reports</a></li>
+                   <li><a href="{{route('users')}}">Users</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -156,6 +158,15 @@
 <script>
     $('.time').datetimepicker({
         format: 'HH:mm:ss'
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker10').datetimepicker({
+            viewMode: 'years',
+            format: 'MM/YYYY'
+        });
     });
 </script>
 </body>
