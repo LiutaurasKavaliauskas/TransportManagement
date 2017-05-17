@@ -30,15 +30,17 @@ class TravelReportsController extends Controller
      */
     public function create(TravelReportsRequest $request)
     {
-//        switch ($request)
-//        {
-//            case (strtotime($request->arrived_to_client_at) <= strtotime($request->left_terminal_at)):
-//                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
-//            case (strtotime($request->left_client_at) <= strtotime($request->arrived_to_client_at)):
-//                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
-//            case (strtotime($request->arrived_to_terminal) <= strtotime($request->left_client_at)):
-//                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
-//        }
+        switch ($request)
+        {
+            case (strtotime($request->arrived_to_client_at) <= strtotime($request->left_terminal_at)):
+                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
+            case (strtotime($request->left_client_at) <= strtotime($request->arrived_to_client_at)):
+                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
+            case (strtotime($request->arrived_to_terminal) <= strtotime($request->left_client_at)):
+                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
+            case (strtotime($request->speedometer_readings_2) <= strtotime($request->speedometer_readings_1)):
+                return redirect()->back()->withInput(Input::all())->withErrors('Speedometer readings are wrong');
+        }
 
         $vehicle = Vehicles::where('id', $request->vehicle)->first();
 
