@@ -2,6 +2,7 @@
 
 return [
 
+    'check_time' => 'asdsadsadsad',
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
