@@ -54,4 +54,9 @@ class User extends Authenticatable
             return false;
     }
 
+    public function getRole()
+    {
+        return Roles::where('id', $this->roles_id)->first()->name;
+    }
+
 }
