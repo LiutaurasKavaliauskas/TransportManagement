@@ -38,7 +38,9 @@ class User extends Authenticatable
     public function isAdmin()
     {
         if(Roles::where('id', $this->roles_id)->first()->name == 'Admin')
-            return;
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -47,6 +49,9 @@ class User extends Authenticatable
     public function isUser()
     {
         if(Roles::where('id', $this->roles_id)->first()->name == 'User')
-            return;
+            return true;
+        else
+            return false;
     }
+
 }
