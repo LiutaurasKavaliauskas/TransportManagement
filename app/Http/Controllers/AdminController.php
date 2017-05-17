@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('transport.admin', ['users' => User::all()->toArray()]);
+        return view('transport.admin', ['users' => User::all()]);
     }
 
     public function showReports(AdminRequest $request, $id)
