@@ -22,47 +22,47 @@
     <div>
         @if(!$reports)
             <div>
-                <h1 style="color: red">No reports created yet!</h1>
+                <h1 style="color: red">{{ trans('transport/reports.no_reports') }}</h1>
             </div>
         @else
             <table>
                 <tbody>
                 <tr>
                     <td>
-                        Vehicle title
+                        {{ trans('transport/reports.table.vehicle_title') }}
                     </td>
                     <td>
-                        Date
+                        {{ trans('transport/reports.table.date') }}
                     </td>
                     <td>
-                        Route
+                        {{ trans('transport/reports.table.route') }}
                     </td>
                     <td>
-                        Left terminal at
+                        {{ trans('transport/reports.table.left_terminal') }}
                     </td>
                     <td>
-                        Speedometer readings
+                        {{ trans('transport/reports.table.speed_read') }}
                     </td>
                     <td>
-                        Arrived to client at
+                        {{ trans('transport/reports.table.client_arrived') }}
                     </td>
                     <td>
-                        Unloading time
+                        {{ trans('transport/reports.table.unload_time') }}
                     </td>
                     <td>
-                        Left client at
+                        {{ trans('transport/reports.table.client_left') }}
                     </td>
                     <td>
-                        Arrived to terminal at
+                        {{ trans('transport/reports.table.terminal_arrived') }}
                     </td>
                     <td>
-                        Speedometer readings
+                        {{ trans('transport/reports.table.speed_read') }}
                     </td>
                     <td>
-                        Distance
+                        {{ trans('transport/reports.table.distance') }}
                     </td>
                     <td>
-                        Fuel
+                        {{ trans('transport/reports.table.fuel') }}
                     </td>
                 </tr>
 

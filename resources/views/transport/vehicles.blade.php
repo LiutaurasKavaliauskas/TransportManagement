@@ -22,14 +22,14 @@
     <div>
         @if(!$vehicles)
             <div>
-                <h1 style="color: red;">No vehicles!</h1>
+                <h1 style="color: red;">{{ trans('transport/vehicles.no_vehicles') }}</h1>
             </div>
         @else
             <table>
                 <tbody>
                 <tr>
                     <td style="font-size: 30px">
-                        Vehicle title
+                        {{ trans('transport/vehicles.table.vehicle_title') }}
                     </td>
                 </tr>
 
@@ -41,11 +41,11 @@
                         <td>
                             <button type="button" class="btn-success" data-toggle="modal"
                                     data-target="#vehiclesEditModal{{$vehicle['id']}}">
-                                Edit Vehicle
+                                {{ trans('transport/vehicles.buttons.edit') }}
                             </button>
                             <button type="button" class="btn-danger" data-toggle="modal"
                                     data-target="#vehiclesDeleteModal{{$vehicle['id']}}">
-                                Delete Vehicle
+                                {{ trans('transport/vehicles.buttons.delete') }}
                             </button>
 
                             {!! Form::open(['url' => route('vehicles.edit', ['id' => $vehicle['id']])]) !!}
@@ -60,21 +60,22 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="vehiclesModalLabel">Vehicles edit form</h4>
+                                                id="vehiclesModalLabel">{{ trans('transport/vehicles.forms.edit') }}</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <label>Vehicle title</label>
-                                            <input name="title" type="text" class="form-control" value="{{$vehicle['title']}}">
+                                            <label>{{ trans('transport/vehicles.table.vehicle_title') }}</label>
+                                            <input name="title" type="text" class="form-control"
+                                                   value="{{$vehicle['title']}}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
                                                     class="btn btn-default"
                                                     data-dismiss="modal">
-                                                Close
+                                                {{ trans('transport/vehicles.buttons.close') }}
                                             </button>
                                             <span class="pull-right">
                                         <button type="submit" class="btn btn-primary">
-                                            Save
+                                            {{ trans('transport/vehicles.buttons.save') }}
                                         </button>
                                     </span>
                                         </div>
@@ -95,24 +96,25 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="vehiclesModalLabel">Vehicles delete form</h4>
+                                                id="vehiclesModalLabel">{{ trans('transport/vehicles.forms.delete') }}</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <label>Vehicle title</label>
-                                            <input name="title" type="text" class="form-control" value="{{$vehicle['title']}}">
+                                            <label>{{ trans('transport/vehicles.table.vehicle_title') }}</label>
+                                            <input name="title" type="text" class="form-control"
+                                                   value="{{$vehicle['title']}}">
                                         </div>
                                         <div>
-                                            Are you sure you want to delete this vehicle?
+                                            {{ trans('transport/vehicles.forms.question') }}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
                                                     class="btn btn-default"
                                                     data-dismiss="modal">
-                                                No
+                                                {{ trans('transport/vehicles.buttons.no') }}
                                             </button>
                                             <span class="pull-right">
                                         <button type="submit" class="btn btn-primary">
-                                            Yes
+                                            {{ trans('transport/vehicles.buttons.yes') }}
                                         </button>
                                     </span>
                                         </div>
@@ -133,7 +135,7 @@
             class="btn btn-primary btn-lg"
             data-toggle="modal"
             data-target="#vehiclesCreateModal">
-        Add Vehicle
+        {{ trans('transport/vehicles.buttons.add') }}
     </button>
 
     {!! Form::open(['url' => route('vehicles.create')]) !!}
@@ -148,20 +150,21 @@
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="vehiclesModalLabel">Vehicles add form</h4>
+                        id="vehiclesModalLabel">{{ trans('transport/vehicles.forms.add') }}</h4>
                 </div>
                 <div class="modal-body">
-                    <label>Vehicle title</label>
+                    <label>{{ trans('transport/vehicles.table.vehicle_title') }}</label>
                     <input name="title" type="text" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button"
                             class="btn btn-default"
-                            data-dismiss="modal">Close
+                            data-dismiss="modal">
+                        {{ trans('transport/vehicles.buttons.close') }}
                     </button>
                     <span class="pull-right">
           <button type="submit" class="btn btn-primary">
-            Create
+            {{ trans('transport/vehicles.buttons.save') }}
           </button>
         </span>
                 </div>

@@ -22,47 +22,47 @@
     <div>
         @if(!$reports->toArray())
             <div>
-                <h1 style="color: red">No reports created yet!</h1>
+                <h1 style="color: red">{{ trans('transport/reports.no_reports') }}</h1>
             </div>
         @else
             <table>
                 <tbody>
                 <tr>
                     <td>
-                        Vehicle title
+                        {{ trans('transport/reports.table.vehicle_title') }}
                     </td>
                     <td>
-                        Date
+                        {{ trans('transport/reports.table.date') }}
                     </td>
                     <td>
-                        Route
+                        {{ trans('transport/reports.table.route') }}
                     </td>
                     <td>
-                        Left terminal at
+                        {{ trans('transport/reports.table.left_terminal') }}
                     </td>
                     <td>
-                        Speedometer readings
+                        {{ trans('transport/reports.table.speed_read') }}
                     </td>
                     <td>
-                        Arrived to client at
+                        {{ trans('transport/reports.table.client_arrived') }}
                     </td>
                     <td>
-                        Unloading time
+                        {{ trans('transport/reports.table.unload_time') }}
                     </td>
                     <td>
-                        Left client at
+                        {{ trans('transport/reports.table.client_left') }}
                     </td>
                     <td>
-                        Arrived to terminal at
+                        {{ trans('transport/reports.table.terminal_arrived') }}
                     </td>
                     <td>
-                        Speedometer readings
+                        {{ trans('transport/reports.table.speed_read') }}
                     </td>
                     <td>
-                        Distance
+                        {{ trans('transport/reports.table.distance') }}
                     </td>
                     <td>
-                        Fuel
+                        {{ trans('transport/reports.table.fuel') }}
                     </td>
                 </tr>
 
@@ -107,11 +107,11 @@
                         <td>
                             <button type="button" class="btn-success" data-toggle="modal"
                                     data-target="#reportsEditModal{{ $report->id }}">
-                                Edit Report
+                                {{ trans('transport/reports.buttons.edit') }}
                             </button>
                             <button type="button" class="btn-danger" data-toggle="modal"
                                     data-target="#reportsDeleteModal{{ $report->id }}">
-                                Delete Report
+                                {{ trans('transport/reports.buttons.delete') }}
                             </button>
 
                             {!! Form::open(['url' => route('reports.edit', ['id' => $report->id])]) !!}
@@ -126,40 +126,40 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="vehiclesModalLabel">Reports edit form</h4>
+                                                id="vehiclesModalLabel">{{ trans('transport/reports.forms.edit') }}</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div style="font-size: 18px">
                                                 {!! Form::select('vehicle', $vehicles, $report->getVehicle->first()['title']) !!}
                                             </div>
-                                            <label>Date</label>
+                                            <label>{{ trans('transport/reports.table.date') }}</label>
                                             <input name="date" type="date" class="form-control" value="{{ $report->date }}">
-                                            <label>Route</label>
+                                            <label>{{ trans('transport/reports.table.route') }}</label>
                                             <input name="route" type="text" class="form-control" value="{{ $report->route }}">
-                                            <label>Left terminal at</label>
+                                            <label>{{ trans('transport/reports.table.left_terminal') }}</label>
                                             <input name="left_terminal_at" class="form-control time" type="text" value="{{  $report->terminal_left }}"/>
-                                            <label>Speedometer readings</label>
+                                            <label>{{ trans('transport/reports.table.speed_read') }}</label>
                                             <input name="speedometer_readings_1" type="number" min="0" class="form-control" value="{{ $report->speedometer_readings_1 }}">
-                                            <label>Arrived to client at</label>
+                                            <label>{{ trans('transport/reports.table.client_arrived') }}</label>
                                             <input name="arrived_to_client_at" class="form-control time" type="text" value="{{ $report->client_arrived }}"/>
-                                            <label>Unloading time</label>
+                                            <label>{{ trans('transport/reports.table.unload_time') }}</label>
                                             <input name="unloading_time" type="number" min="0" class="form-control" value="{{ $report->time_unloading }}">
-                                            <label>Left client at</label>
+                                            <label>{{ trans('transport/reports.table.client_left') }}</label>
                                             <input name="left_client_at" class="form-control time" type="text" value="{{ $report->client_left }}"/>
-                                            <label>Arrived to terminal at</label>
+                                            <label>{{ trans('transport/reports.table.terminal_arrived') }}</label>
                                             <input name="arrived_to_terminal_at" class="form-control time" type="text" value="{{ $report->terminal_arrived }}"/>
-                                            <label>Speedometer readings</label>
+                                            <label>{{ trans('transport/reports.table.speed_read') }}</label>
                                             <input name="speedometer_readings_2" type="number" min="0" class="form-control" value="{{ $report->speedometer_readings_2 }}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
                                                     class="btn btn-default"
                                                     data-dismiss="modal">
-                                                Close
+                                                {{ trans('transport/reports.buttons.close') }}
                                             </button>
                                             <span class="pull-right">
                                         <button type="submit" class="btn btn-primary">
-                                            Save
+                                            {{ trans('transport/reports.buttons.save') }}
                                         </button>
                                     </span>
                                         </div>
@@ -180,22 +180,22 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="vehiclesModalLabel">Reports delete form</h4>
+                                                id="vehiclesModalLabel">{{ trans('transport/reports.forms.delete') }}</h4>
                                         </div>
                                         <div class="modal-body">
                                         </div>
                                         <div>
-                                            Are you sure you want to delete this report?
+                                            {{ trans('transport/reports.forms.question') }}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
                                                     class="btn btn-default"
                                                     data-dismiss="modal">
-                                                No
+                                                {{ trans('transport/reports.buttons.no') }}
                                             </button>
                                             <span class="pull-right">
                                         <button type="submit" class="btn btn-primary">
-                                            Yes
+                                            {{ trans('transport/reports.buttons.yes') }}
                                         </button>
                                     </span>
                                         </div>
@@ -216,7 +216,7 @@
             class="btn btn-primary btn-lg"
             data-toggle="modal"
             data-target="#reportsCreateModal">
-        New Report
+        {{ trans('transport/reports.buttons.new') }}
     </button>
 
     {!! Form::open(['url' => route('reports.create')]) !!}
@@ -231,39 +231,40 @@
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="vehiclesModalLabel">Reports add form</h4>
+                        id="vehiclesModalLabel">{{ trans('transport/reports.forms.add') }}</h4>
                 </div>
                 <div class="modal-body">
                     <div style="font-size: 18px">
                         {!! Form::select('vehicle', $vehicles, null, ['placeholder' => 'Select a vehicle']) !!}
                     </div>
-                    <label>Date</label>
+                    <label>{{ trans('transport/reports.table.date') }}</label>
                     <input name="date" type="date" class="form-control">
-                    <label>Route</label>
+                    <label>{{ trans('transport/reports.table.route') }}</label>
                     <input name="route" type="text" class="form-control">
-                    <label>Left terminal at</label>
+                    <label>{{ trans('transport/reports.table.left_terminal') }}</label>
                     <input name="left_terminal_at" class="form-control time" type="text"/>
-                    <label>Speedometer readings</label>
+                    <label>{{ trans('transport/reports.table.speed_read') }}</label>
                     <input name="speedometer_readings_1" type="number" min="0" class="form-control">
-                    <label>Arrived to client at</label>
+                    <label>{{ trans('transport/reports.table.client_arrived') }}</label>
                     <input name="arrived_to_client_at" class="form-control time" type="text"/>
-                    <label>Unloading time</label>
+                    <label>{{ trans('transport/reports.table.unload_time') }}</label>
                     <input name="unloading_time" type="number" min="0" class="form-control">
-                    <label>Left client at</label>
+                    <label>{{ trans('transport/reports.table.client_left') }}</label>
                     <input name="left_client_at" class="form-control time" type="text"/>
-                    <label>Arrived to terminal at</label>
+                    <label>{{ trans('transport/reports.table.terminal_arrived') }}</label>
                     <input name="arrived_to_terminal_at" class="form-control time" type="text"/>
-                    <label>Speedometer readings</label>
+                    <label>{{ trans('transport/reports.table.speed_read') }}</label>
                     <input name="speedometer_readings_2" type="number" min="0" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button"
                             class="btn btn-default"
-                            data-dismiss="modal">Close
+                            data-dismiss="modal">
+                        {{ trans('transport/reports.buttons.close') }}
                     </button>
                     <span class="pull-right">
           <button type="submit" class="btn btn-primary">
-            Create
+              {{ trans('transport/reports.buttons.create') }}
           </button>
         </span>
                 </div>

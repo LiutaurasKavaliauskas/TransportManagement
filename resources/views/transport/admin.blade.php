@@ -22,20 +22,20 @@
     <div>
         @if(!$users)
             <div>
-                <h1 style="color: red;">No users!</h1>
+                <h1 style="color: red;">{{ trans('transport/admin.no_users') }}</h1>
             </div>
         @else
             <table>
                 <tbody>
                 <tr>
                     <td style="font-size: 30px">
-                        User name
+                        {{ trans('transport/admin.table.name') }}
                     </td>
                     <td style="font-size: 30px">
-                        User email
+                        {{ trans('transport/admin.table.email') }}
                     </td>
                     <td style="font-size: 30px">
-                        Select Month
+                        {{ trans('transport/admin.table.month') }}
                     </td>
                 </tr>
 
@@ -59,7 +59,7 @@
                         </td>
                         <td>
                             <button type="submit" class="btn-success">
-                            Show info
+                            {{ trans('transport/admin.butons.show') }}
                             </button>
                         </td>
                         {!! Form::close() !!}

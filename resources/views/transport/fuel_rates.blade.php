@@ -21,23 +21,23 @@
     <div>
         @if(!$rates->toArray())
             <div>
-                <h1 style="color: red">No fuel rates!</h1>
+                <h1 style="color: red">{{ trans('transport/rates.no_rates') }}</h1>
             </div>
         @else
             <table>
                 <tbody>
                 <tr>
                     <td style="font-size: 30px">
-                        Vehicle title
+                        {{ trans('transport/rates.table.title') }}
                     </td>
                     <td style="font-size: 30px">
-                        Idle rate
+                        {{ trans('transport/rates.table.idle') }}
                     </td>
                     <td style="font-size: 30px">
-                        Going rate
+                        {{ trans('transport/rates.table.going') }}
                     </td>
                     <td style="font-size: 30px">
-                        Unloading rate
+                        {{ trans('transport/rates.table.unloading') }}
                     </td>
                 </tr>
 
@@ -58,11 +58,11 @@
                         <td>
                             <button type="button" class="btn-success" data-toggle="modal"
                                     data-target="#ratesEditModal{{$rate['id']}}">
-                                Edit Rate
+                                {{ trans('transport/rates.buttons.edit') }}
                             </button>
                             <button type="button" class="btn-danger" data-toggle="modal"
                                     data-target="#ratesDeleteModal{{$rate['id']}}">
-                                Delete Rate
+                                {{ trans('transport/rates.buttons.delete') }}
                             </button>
 
                             {!! Form::open(['url' => route('fuel.rates.edit', ['id' => $rate['id']])]) !!}
@@ -77,26 +77,29 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="vehiclesModalLabel">Vehicles edit form</h4>
+                                                id="vehiclesModalLabel">{{ trans('transport/rates.forms.edit') }}</h4>
                                         </div>
                                         <div class="modal-body">
                                             <input name="vehicle" type="hidden" value="{{$rate->vehicle['id']}}">
-                                            <label>Idle rate</label>
-                                            <input name="idle_rate" type="number" min="0" class="form-control" value="{{  $rate['idle_rate'] }}">
-                                            <label>Going rate</label>
-                                            <input name="going_rate" type="number" min="0" class="form-control" value="{{ $rate['going_rate'] }}">
-                                            <label>Unloading rate</label>
-                                            <input name="unloading_rate" type="number" min="0" class="form-control" value="{{ $rate['unloading_rate'] }}">
+                                            <label>{{ trans('transport/rates.table.idle') }}</label>
+                                            <input name="idle_rate" type="number" min="0" class="form-control"
+                                                   value="{{  $rate['idle_rate'] }}">
+                                            <label>{{ trans('transport/rates.table.going') }}</label>
+                                            <input name="going_rate" type="number" min="0" class="form-control"
+                                                   value="{{ $rate['going_rate'] }}">
+                                            <label>{{ trans('transport/rates.table.unloading') }}</label>
+                                            <input name="unloading_rate" type="number" min="0" class="form-control"
+                                                   value="{{ $rate['unloading_rate'] }}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
                                                     class="btn btn-default"
                                                     data-dismiss="modal">
-                                                Close
+                                                {{ trans('transport/rates.buttons.close') }}
                                             </button>
                                             <span class="pull-right">
                                         <button type="submit" class="btn btn-primary">
-                                            Save
+                                            {{ trans('transport/rates.buttons.save') }}
                                         </button>
                                     </span>
                                         </div>
@@ -117,28 +120,28 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title"
-                                                id="ratesModalLabel">Rates Delete Form</h4>
+                                                id="ratesModalLabel">{{ trans('transport/rates.forms.delete') }}</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <label>Idle rate</label>
+                                            <label>{{ trans('transport/rates.table.idle') }}</label>
                                             <input name="idle_rate" type="number" min="0" class="form-control">
-                                            <label>Going rate</label>
+                                            <label>{{ trans('transport/rates.table.going') }}</label>
                                             <input name="going_rate" type="number" min="0" class="form-control">
-                                            <label>Unloading rate</label>
+                                            <label>{{ trans('transport/rates.table.unloading') }}</label>
                                             <input name="unloading_rate" type="number" min="0" class="form-control">
                                         </div>
                                         <div>
-                                            Are you sure you want to delete these rates?
+                                            {{ trans('transport/rates.forms.question') }}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
                                                     class="btn btn-default"
                                                     data-dismiss="modal">
-                                                No
+                                                {{ trans('transport/rates.buttons.no') }}
                                             </button>
                                             <span class="pull-right">
                                         <button type="submit" class="btn btn-primary">
-                                            Yes
+                                            {{ trans('transport/rates.buttons.yes') }}
                                         </button>
                                     </span>
                                         </div>
@@ -157,7 +160,7 @@
 
     @if(!$vehicles)
         <div>
-            <h1 style="color: red">Create a new vehicle first!</h1>
+            <h1 style="color: red">{{ trans('transport/rates.create') }}</h1>
         </div>
     @else
         <button
@@ -165,7 +168,7 @@
                 class="btn btn-primary btn-lg"
                 data-toggle="modal"
                 data-target="#ratesCreateModal">
-            Add Fuel Rate
+            {{ trans('transport/rates.buttons.add') }}
         </button>
     @endif
 
@@ -181,27 +184,28 @@
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="vehiclesModalLabel">Fuel Rates Add Form</h4>
+                        id="vehiclesModalLabel">{{ trans('transport/rates.forms.add') }}</h4>
                 </div>
                 <div class="modal-body">
                     <div style="font-size: 18px">
-                        {!! Form::select('vehicle', $vehicles, null, ['placeholder' => 'Select a vehicle']) !!}
+                        {!! Form::select('vehicle', $vehicles, null, ['placeholder' => trans('transport/rates.forms.select')]) !!}
                     </div>
-                    <label>Idle rate</label>
+                    <label>{{ trans('transport/rates.table.idle') }}</label>
                     <input name="idle_rate" type="number" min="0" class="form-control">
-                    <label>Going rate</label>
+                    <label>{{ trans('transport/rates.table.going') }}</label>
                     <input name="going_rate" type="number" min="0" class="form-control">
-                    <label>Unloading rate</label>
+                    <label>{{ trans('transport/rates.table.unloading') }}</label>
                     <input name="unloading_rate" type="number" min="0" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button"
                             class="btn btn-default"
-                            data-dismiss="modal">Close
+                            data-dismiss="modal">
+                        {{ trans('transport/rates.buttons.close') }}
                     </button>
                     <span class="pull-right">
           <button type="submit" class="btn btn-primary">
-            Create
+            {{ trans('transport/rates.buttons.save') }}
           </button>
         </span>
                 </div>

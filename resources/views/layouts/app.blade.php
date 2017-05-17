@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ trans('transport/welcome.title') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -22,7 +22,8 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -93,25 +94,29 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ trans('transport/welcome.title') }}
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                   <li><a href="{{route('vehicles')}}">Vehicles</a></li> &nbsp;
-                   <li><a href="{{route('fuel.rates')}}">FuelRates</a></li>
-                   <li><a href="{{route('reports')}}">Reports</a></li>
-                   <li><a href="{{route('users')}}">Users</a></li>
+                    @if(Auth::check() && Auth::user()->isAdmin())
+                        <li><a href="{{route('vehicles')}}">{{ trans('transport/layout.menu.vehicles') }}</a></li> &nbsp;
+                        <li><a href="{{route('fuel.rates')}}">{{ trans('transport/layout.menu.fuel_rates') }}</a></li>
+                        <li><a href="{{route('users')}}">{{ trans('transport/layout.menu.users') }}</a></li>
+                    @endif
+                    @if(Auth::check() && Auth::user()->isUser() || Auth::check() && Auth::user()->isAdmin())
+                        <li><a href="{{route('reports')}}">{{ trans('transport/layout.menu.reports') }}</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}">{{ trans('transport/welcome.menu.login') }}</a></li>
+                        <li><a href="{{ route('register') }}">{{ trans('transport/welcome.menu.register') }}</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -124,7 +129,7 @@
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        Logout
+                                        {{ trans('transport/welcome.menu.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -148,8 +153,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>

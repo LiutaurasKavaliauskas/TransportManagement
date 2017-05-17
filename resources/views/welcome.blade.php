@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ trans('transport/welcome.title') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -69,25 +69,23 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">{{ trans('transport/welcome.menu.home') }}</a>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/login') }}">{{ trans('transport/welcome.menu.login') }}</a>
+                        <a href="{{ url('/register') }}">{{ trans('transport/welcome.menu.register') }}</a>
                     @endif
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {!! trans('transport/welcome.message') !!}
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://github.com/LiutaurasKavaliauskas/TransportManagement">{{ trans('transport/welcome.menu.github') }}</a>
+                    <a href="https://www.facebook.com/liutauras.kavaliauskas">{{ trans('transport/welcome.menu.facebook') }}</a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=liutauraskav@gmail.com&su=Užduotis&body=Jūsų žinutė">{{ trans('transport/welcome.menu.email') }}</a>
                 </div>
             </div>
         </div>
