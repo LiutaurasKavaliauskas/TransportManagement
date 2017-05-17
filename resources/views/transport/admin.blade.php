@@ -20,7 +20,7 @@
     @endif
 
     <div>
-        @if(!$users)
+        @if(!$users->toArray())
             <div>
                 <h1 style="color: red;">{{ trans('transport/admin.no_users') }}</h1>
             </div>
@@ -34,6 +34,9 @@
                     <td style="font-size: 30px">
                         {{ trans('transport/admin.table.email') }}
                     </td>
+                    <td  style="font-size: 30px">
+                        {{ trans('transport/admin.table.role') }}
+                    </td>
                     <td style="font-size: 30px">
                         {{ trans('transport/admin.table.month') }}
                     </td>
@@ -42,13 +45,16 @@
                 @foreach($users as $user)
                     <tr>
                         <td>
-                            {{ $user['name'] }}
+                            {{ $user->name }}
                         </td>
                         <td>
-                            {{ $user['email'] }}
+                            {{ $user->email }}
                         </td>
                         <td>
-                            {!! Form::open(['url' => route('users.show', ['id' => $user['id']])]) !!}
+                            {{ $user->getRole() }}
+                        </td>
+                        <td>
+                            {!! Form::open(['url' => route('users.show', ['id' => $user->id])]) !!}
                             <div class='input-group date' id='datetimepicker10'>
                                 <input name="month" type='text' class="form-control"/>
                                 <span class="input-group-addon">
@@ -59,7 +65,7 @@
                         </td>
                         <td>
                             <button type="submit" class="btn-success">
-                            {{ trans('transport/admin.butons.show') }}
+                            {{ trans('transport/admin.buttons.show') }}
                             </button>
                         </td>
                         {!! Form::close() !!}

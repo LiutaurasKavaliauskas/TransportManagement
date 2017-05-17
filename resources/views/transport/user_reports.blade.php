@@ -20,7 +20,7 @@
     @endif
 
     <div>
-        @if(!$reports)
+        @if(!$reports->toArray())
             <div>
                 <h1 style="color: red">{{ trans('transport/reports.no_reports') }}</h1>
             </div>
