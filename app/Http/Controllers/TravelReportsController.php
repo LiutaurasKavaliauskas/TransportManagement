@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TravelReportsRequest;
+use App\Models\FuelRates;
 use App\Models\TravelReports;
 use App\Models\UsersTravelReportsConnections;
 use App\Models\Vehicles;
 use App\Models\VehiclesReportsConnections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class TravelReportsController extends Controller
@@ -20,7 +22,9 @@ class TravelReportsController extends Controller
      */
     public function index()
     {
-        return view('transport.reports', ['reports' => TravelReports::all(), 'vehicles' => Vehicles::pluck('title', 'id')->toArray()]);
+        return view('transport.reports', ['reports' => TravelReports::all(), 'vehicles' => array_pluck(DB::table('tm_vehicles')
+            ->join('tm_fuel_rates', 'tm_fuel_rates.tm_vehicles_id', '=', 'tm_vehicles.id')
+            ->get()->toArray(), 'title', 'tm_vehicles_id')]);
     }
 
     /**
@@ -33,12 +37,10 @@ class TravelReportsController extends Controller
         switch ($request)
         {
             case (strtotime($request->arrived_to_client_at) <= strtotime($request->left_terminal_at)):
-                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
-            case (strtotime($request->left_client_at) <= strtotime($request->arrived_to_client_at)):
-                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
-            case (strtotime($request->arrived_to_terminal) <= strtotime($request->left_client_at)):
-                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong');
-            case (strtotime($request->speedometer_readings_2) <= strtotime($request->speedometer_readings_1)):
+                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong1');
+            case (strtotime($request->arrived_to_terminal_at) <= strtotime($request->left_client_at)):
+                return redirect()->back()->withInput(Input::all())->withErrors('Time set is wrong2');
+            case ($request->speedometer_readings_2 <= $request->speedometer_readings_1):
                 return redirect()->back()->withInput(Input::all())->withErrors('Speedometer readings are wrong');
         }
 

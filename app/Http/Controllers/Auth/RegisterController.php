@@ -63,11 +63,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $record = Roles::where('name', 'user')->first();
+        $record = Roles::where('name', 'Admin')->first();
 
         if(!$record)
             $record = Roles::create([
-                'name' => 'User'
+                'name' => 'Admin'
             ]);
 
         return User::create([
