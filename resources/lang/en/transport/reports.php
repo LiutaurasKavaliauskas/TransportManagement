@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'no_reports' => 'No reports created yet!',
+    'no_reports' => 'No reports!',
     'table'      => [
         'vehicle_title'    => 'Vehicle title',
         'date'             => 'Date',

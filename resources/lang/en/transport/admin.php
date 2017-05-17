@@ -2,12 +2,13 @@
 
 return [
     'no_users' => 'No users!',
-    'table' => [
-        'name' => 'User Name',
+    'table'    => [
+        'name'  => 'User Name',
         'email' => 'User Email',
-        'month' => 'Select Month'
+        'month' => 'Select Month',
+        'role'  => 'Role'
     ],
-    'buttons' => [
-        'show' => 'Show Info'
+    'buttons'  => [
+        'show' => 'Show Info',
     ]
 ];
