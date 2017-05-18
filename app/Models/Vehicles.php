@@ -22,21 +22,13 @@ class Vehicles extends Model
         'title',
     ];
 
+    /**
+     * Return the connected fuel rates
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function fuelRates()
     {
         return $this->belongsTo('App\Models\Fuelrates',  'id', 'tm_vehicles_id');
     }
-//
-//    public function filterVehicles()
-//    {
-//        $vehicles = [];
-//        foreach (Vehicles::all() as $vehicle)
-//            foreach (FuelRates::all() as $rate)
-//                if($vehicle['id'] != $rate->vehicle['id'])
-//                    $vehicles = $vehicle;
-//
-//        dd($vehicles);
-//        return $vehicles;
-//
-//    }
 }

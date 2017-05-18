@@ -25,6 +25,11 @@ class FuelRates extends Model
         'tm_vehicles_id',
     ];
 
+    /**
+     * Return the connected vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function vehicle()
     {
         return $this->hasOne('App\Models\Vehicles', 'id', 'tm_vehicles_id');

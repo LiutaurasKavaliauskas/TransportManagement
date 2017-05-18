@@ -33,11 +33,21 @@ class TravelReports extends Model
         'fuel',
     ];
 
+    /**
+     * Return the connected vehicles
+     *
+     * @return mixed
+     */
     public function getVehicle()
     {
         return $this->belongsToMany(Vehicles::class, (new VehiclesReportsConnections())->getTable(), 'tm_travel_reports_id', 'tm_vehicles_id')->select('title');
     }
 
+    /**
+     * Return the connected user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function getUser()
     {
         return $this->belongsToMany(User::class, (new UsersTravelReportsConnections())->getTable(), 'tm_travel_reports_id', 'user_id');

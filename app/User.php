@@ -33,7 +33,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * Checks if user has admin role
+     * Check if user's role is admin
+     *
+     * @return bool
      */
     public function isAdmin()
     {
@@ -44,7 +46,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Checks if users has user role
+     * Check if user's role is user
+     *
+     * @return bool
      */
     public function isUser()
     {
@@ -54,6 +58,11 @@ class User extends Authenticatable
             return false;
     }
 
+    /**
+     * Get role of user
+     *
+     * @return mixed
+     */
     public function getRole()
     {
         return Roles::where('id', $this->roles_id)->first()->name;
