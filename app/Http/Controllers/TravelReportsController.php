@@ -28,7 +28,7 @@ class TravelReportsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -79,7 +79,7 @@ class TravelReportsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edit the specified resource.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
